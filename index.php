@@ -33,12 +33,20 @@ class Persona{
 
 }
 
+class Profesor extends Persona{
 
-$Personas = [];
+    public $numeroClasesSemanales;
+    public $numeroCursos;
 
-    for ($i=0; $i < 10; $i++) { 
-        $Personas[] = new Persona("Persona numero $i","Apellido numero $i",$i);
+    function __construct($numeroClasesSemanales,$numeroCursos,$nombre,$apellido,$dni){
+        $this->numeroClasesSemanales =$numeroClasesSemanales;
+        $this->numeroCursos =$numeroCursos;
+        parent::__construct($nombre,$apellido,$dni);
     }
+}
 
-echo Contador::$contador;
+$Profe1 = new Profesor(10,5,"Javier","Gomez",21);
+
+
+
 // print_r($Persona1);
