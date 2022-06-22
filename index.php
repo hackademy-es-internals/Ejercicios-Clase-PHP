@@ -1,56 +1,80 @@
 <?php
 
 // function elige(){
-//     $alumnos = ["Yamila","Julen","Patri","Gabri","Elena","Fede"];
-//     return $alumnos[rand(0,5)];
+//     $alumnos = ["Yamila","Julen","Patri","Elena","Fede"];
+//     return $alumnos[rand(0,4)];
 // }
 // sleep(4);
 // echo elige();
 
-class Telefono{
 
-    public $SO;
-    public $version;
-    static $numeroSerie = 1232412;
 
-    function __construct($SO,$version)
-    {
-        $this -> SO = $SO; 
-        $this -> version = $version;
-    }
-}
+// 2 * PI * radio
 
-class miTelefono extends Telefono{
+class figura{
 
-    private $configuracion;
-    private $tema;
-    static $tlf;
+    public $longitud;
 
-    function __construct($configuracion,$tema,$tlf,$SO,$version)
-    {
-        $this -> configuracion = $configuracion; 
-        $this -> tema = $tema;
+    function __constructor ($longitud){
 
-        miTelefono::$tlf = $tlf;
-        
-        parent::__construct($SO,$version);
-    }
+        $this -> longitud = $longitud;
 
-    static function llamar(){
-        return "Coge el telefonooo que te esta llamando ". miTelefono::$tlf;
     }
 
 }
 
-$miMovil = new miTelefono("Sencilla","Oscuro",111222333,"Android","Kitkat");
+class triangulo extends figura{
+
+    public $altura;
+
+    function __construct($altura,$longitud)
+    {
+        $this -> altura = $altura;
+
+        parent::__constructor($longitud);
+
+    }
+
+}
+
+class circulo extends figura{
 
 
-echo miTelefono::llamar()."\n";
+    function __construct($longitud)
+    {
+
+        parent::__constructor($longitud);
+
+    }
+
+}
 
 
-$miMovil2 = new miTelefono("Sencilla","Oscuro",111222444,"Android","Kitkat");
+
+
+class Operacion{
+    
+    static function calculaTriangulo($base,$altura){
+
+        return ($base*$altura);
+
+    }
+
+    static function calculaCirculo($longitud){
+
+        return 2 * 3.14 * $longitud;
+
+    }
+
+
+}
 
 
 
-echo miTelefono::llamar();
+$Triangulo = new triangulo(5,2);
+
+$Circulo = new circulo(2);
+
+echo Operacion::calculaCirculo($Circulo->longitud);
+
 ?>
