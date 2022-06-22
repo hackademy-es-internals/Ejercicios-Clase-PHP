@@ -1,29 +1,44 @@
 <?php
 
-//Atributos que son los datos que vamos a utilizar
+class Contador{
+    
+    static $contador = 0 ;
 
-//Metodos que son las acciones o operaciones que vamos a realizar con el objetos 
+    static function veces(){
 
+        Contador::$contador++;
 
-
-class Factura
-{
-
-    private $nombreTienda  = "Floristeria Maribel";
-    private $nombreCliente;
-    private $precioTotal;
-
-    function __construct()
-    {
-        
     }
 
-    function __toString()
-    {
-        return "Gracias por visitar $this->nombreTienda.\n$this->nombreCliente ha pagado un total de: $this->precioTotal";
-    }
+
 }
 
-$factura = new Factura("Javier", 16);
+class Persona{
 
-echo $factura->nombreTienda;
+    public $nombre;
+    public $apellido;
+    public $dni;
+
+    function __construct($nombre,$apellido,$dni)
+    {
+        $this -> nombre = $nombre;
+        $this -> apellido = $apellido;
+        $this -> dni = $dni;
+        Contador::veces();
+    }
+
+    function saluda(){
+        return "Hola soy $this->nombre y te digo hola";
+    }
+
+}
+
+
+$Personas = [];
+
+    for ($i=0; $i < 10; $i++) { 
+        $Personas[] = new Persona("Persona numero $i","Apellido numero $i",$i);
+    }
+
+echo Contador::$contador;
+// print_r($Persona1);
