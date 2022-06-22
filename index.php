@@ -1,52 +1,56 @@
 <?php
 
-class Contador{
-    
-    static $contador = 0 ;
+// function elige(){
+//     $alumnos = ["Yamila","Julen","Patri","Gabri","Elena","Fede"];
+//     return $alumnos[rand(0,5)];
+// }
+// sleep(4);
+// echo elige();
 
-    static function veces(){
+class Telefono{
 
-        Contador::$contador++;
+    public $SO;
+    public $version;
+    static $numeroSerie = 1232412;
 
-    }
-
-
-}
-
-class Persona{
-
-    public $nombre;
-    public $apellido;
-    public $dni;
-
-    function __construct($nombre,$apellido,$dni)
+    function __construct($SO,$version)
     {
-        $this -> nombre = $nombre;
-        $this -> apellido = $apellido;
-        $this -> dni = $dni;
-        Contador::veces();
+        $this -> SO = $SO; 
+        $this -> version = $version;
+    }
+}
+
+class miTelefono extends Telefono{
+
+    private $configuracion;
+    private $tema;
+    static $tlf;
+
+    function __construct($configuracion,$tema,$tlf,$SO,$version)
+    {
+        $this -> configuracion = $configuracion; 
+        $this -> tema = $tema;
+
+        miTelefono::$tlf = $tlf;
+        
+        parent::__construct($SO,$version);
     }
 
-    function saluda(){
-        return "Hola soy $this->nombre y te digo hola";
+    static function llamar(){
+        return "Coge el telefonooo que te esta llamando ". miTelefono::$tlf;
     }
 
 }
 
-class Profesor extends Persona{
+$miMovil = new miTelefono("Sencilla","Oscuro",111222333,"Android","Kitkat");
 
-    public $numeroClasesSemanales;
-    public $numeroCursos;
 
-    function __construct($numeroClasesSemanales,$numeroCursos,$nombre,$apellido,$dni){
-        $this->numeroClasesSemanales =$numeroClasesSemanales;
-        $this->numeroCursos =$numeroCursos;
-        parent::__construct($nombre,$apellido,$dni);
-    }
-}
+echo miTelefono::llamar()."\n";
 
-$Profe1 = new Profesor(10,5,"Javier","Gomez",21);
+
+$miMovil2 = new miTelefono("Sencilla","Oscuro",111222444,"Android","Kitkat");
 
 
 
-// print_r($Persona1);
+echo miTelefono::llamar();
+?>
