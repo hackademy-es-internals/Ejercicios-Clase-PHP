@@ -1,80 +1,87 @@
 <?php
+class Contador{
 
-// function elige(){
-//     $alumnos = ["Yamila","Julen","Patri","Elena","Fede"];
-//     return $alumnos[rand(0,4)];
-// }
-// sleep(4);
-// echo elige();
+    static $contador = 0;
 
+    static function veces(){
 
-
-// 2 * PI * radio
-
-class figura{
-
-    public $longitud;
-
-    function __constructor ($longitud){
-
-        $this -> longitud = $longitud;
-
-    }
-
-}
-
-class triangulo extends figura{
-
-    public $altura;
-
-    function __construct($altura,$longitud)
-    {
-        $this -> altura = $altura;
-
-        parent::__constructor($longitud);
-
-    }
-
-}
-
-class circulo extends figura{
-
-
-    function __construct($longitud)
-    {
-
-        parent::__constructor($longitud);
+        Contador::$contador++;
 
     }
 
 }
 
 
+class Producto{
 
+    protected $nombre;
+    public $precio;
 
-class Operacion{
+    function __construct($nombre,$precio){
+
+        $this -> nombre = $nombre;
+
+        $this -> precio = $precio;
+
+        Contador::veces();
+
+    }
     
-    static function calculaTriangulo($base,$altura){
+    function __toString()
+    {
+        return "Nombre: $this->nombre, Precio: $this->precio";
+    }
 
-        return ($base*$altura);
+    final function fechaCaducidad(){
+        return "20/12/2024";
+    }
+
+}   
+
+class Fruta extends Producto{
+
+    public $color;
+    public $sabor;
+
+    function __construct($color,$sabor,$nombre,$precio)
+    {
+        $this -> color = $color;
+
+        $this -> sabor = $sabor;
+
+        parent::__construct($nombre,$precio);
 
     }
 
-    static function calculaCirculo($longitud){
-
-        return 2 * 3.14 * $longitud;
-
-    }
-
+    
 
 }
 
+$Productos = [new Fruta("Roja","dulce","Manzana",8),
+
+             new Fruta("Amarillo","dulce","Platano",6),
+
+             new Fruta("Marron","dulce","Kiwi",8),
+
+             new Fruta("Naranja","acida","Naranja",6)];
 
 
-$Triangulo = new triangulo(5,2);
+$carrito = [];
 
-$Circulo = new circulo(2);
+$cartera=20;
 
-echo Operacion::calculaCirculo($Circulo->longitud);
+foreach ($Productos as $producto) {
 
+    if ($producto->precio <= $cartera) {
+
+       $carrito[] = "Has comprado un $producto->nombre de color $producto->color y de sabor $producto->sabor";
+
+       $cartera = $cartera -$producto->precio;
+
+       echo "Te quedan $cartera €\n";
+    }
+
+}
+
+print_r($carrito);
 ?>
